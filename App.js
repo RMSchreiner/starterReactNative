@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Rating from './Rating';
+import{Container, Header, Content, Button, Text} from 'native-base';
+
+
+
 
 export default function App() {
+
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+   <Container>
+<Header/>
+<Content>
+<Rating rating ='1'/>
+<Rating rating ='2'/>
+<Rating rating ='3'/>
+<Rating rating ='4'/>
+<Rating rating ='5'/>
+
+</Content>
+   </Container>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
