@@ -10,19 +10,25 @@ const [passwordError, setPasswordError] = useState("")
 
 const handleSubmit = () =>{
 
-let regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+
 var emailValid = false;
 
 if(email.length == 0){
     setEmailError("Email is required");
 }
-else if (email.length < 6){
+else if(email.length < 6){
     setEmailError("Email should be minimum of 6 characters");
 }
-else if(email.indexOf(' ') >= 0) {
+else if (email.indexOf(' ') >= 0) {
     setEmailError ('Email cannot contain spaces');
 }
-else if (password.length == 0){
+else {setEmailError("")
+      emailValid = true}
+
+var passwordValid = false;
+let regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+
+if (password.length == 0){
     setPasswordError ('Password is Required');
 }
 else if (password.length < 8){
@@ -34,12 +40,14 @@ else if(password.indexOf(' ') >= 0) {
 else if(!password.match(regex)){
     setPasswordError ("Password: 1 Capital, 8 Letters, 1 #, and 1 Special")
 }
-else {setEmailError("");
-setPasswordError("");
-emailValid = true
+else {setPasswordError("");
+passwordValid = true;
 }
-if(emailValid){
+
+if(emailValid && passwordValid){
     alert('Email:' + email + '\nPassword:' + password);
+    setEmail("");
+    setPassword("");
  }
 }
     return (
@@ -55,10 +63,13 @@ if(emailValid){
 
           <Form>
             <Item>
-              <Input placeholder="Enter Email" onChangeText= {text => setEmail(text)}/>
+              <Input placeholder="Enter Email" onChangeText= {text => setEmail(text)}
+              value = {email}
+              />
             </Item>
             <Item last>
-              <Input placeholder="Enter Password" onChangeText = {text => setPassword(text)}/>
+              <Input placeholder="Enter Password" onChangeText = {text => setPassword(text)}
+              value = {password}/>
             </Item>
             <Button onPress = {handleSubmit}>
             <Text> Submit </Text>
